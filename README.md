@@ -17,8 +17,8 @@
 
 | 조 이름 | 브랜치 링크 |
 |:-------:|:----------------------------:|
-|  우린1조 브랜치  | [GITHUB](https://github.com/SOPT-all/35-STUDY-ANDROID-ANSHIM/tree/team1/develop)       |
-| 작당모2조 브랜치 | [GITHUB](https://github.com/SOPT-all/35-STUDY-ANDROID-ANSHIM/tree/team2/develop) |
+|  우린1조 브랜치  | [GITHUB]("")       |
+| 작당모2조 브랜치 | [GITHUB]("") |
 
 <br>
 
