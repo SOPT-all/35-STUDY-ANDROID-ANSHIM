@@ -133,4 +133,7 @@ fabric.properties
 
 !/gradle/wrapper/gradle-wrapper.jar
 
+# macOS-specific files
+.DS_Store
+
 # End of https://www.toptal.com/developers/gitignore/api/androidstudio
