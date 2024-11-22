@@ -23,3 +23,4 @@ rootProject.name = "Anshim"
 include(":app")
 include(":feature:home")
 include(":feature:addbook")
+include(":core:common")
