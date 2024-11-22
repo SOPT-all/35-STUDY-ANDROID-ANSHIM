@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Anshim"
 include(":app")
- 
+include(":feature:home")
