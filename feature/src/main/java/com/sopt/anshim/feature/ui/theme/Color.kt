@@ -1,4 +1,4 @@
-package com.sopt.anshim.ui.theme
+package com.sopt.anshim.feature.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
