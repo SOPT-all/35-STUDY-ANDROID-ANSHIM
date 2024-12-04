@@ -1,4 +1,4 @@
-package com.sopt.anshim.feature.ui.addBook
+package com.sopt.anshim.domain.model
 
 data class Book(
     val title: String,

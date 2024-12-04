@@ -1,6 +1,7 @@
 package com.sopt.anshim.feature.ui.addBook
 
 import androidx.navigation.NavOptions
+import com.sopt.anshim.domain.model.Book
 import com.sopt.anshim.feature.ui.util.UiEffect
 import com.sopt.anshim.feature.ui.util.UiEvent
 import com.sopt.anshim.feature.ui.util.UiState

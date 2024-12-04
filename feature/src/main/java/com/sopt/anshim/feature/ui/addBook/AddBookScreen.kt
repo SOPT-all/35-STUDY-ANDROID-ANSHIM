@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.sopt.anshim.domain.model.Book
 import com.sopt.anshim.feature.ui.addBook.component.FilledTextField
 import com.sopt.anshim.feature.ui.addBook.component.ImageUploadField
 import com.sopt.anshim.feature.ui.addBook.component.NumericInputField
@@ -141,7 +142,7 @@ fun AddBookScreen(
             ) {
                 Button(
                     onClick = {
-                        viewModel.processEvent(
+                        viewModel.sendEvent(
                             AddBookContract.Event.SaveBookTemporarily(
                                 Book(
                                     title.value,
@@ -164,7 +165,7 @@ fun AddBookScreen(
                 Button(
                     onClick = {
                         if (title.value.isNotBlank() || author.value.isNotBlank()) {
-                            viewModel.processEvent(
+                            viewModel.sendEvent(
                                 AddBookContract.Event.SaveBookTemporarily(
                                     Book(
                                         title.value,

@@ -1,6 +1,7 @@
 package com.sopt.anshim.feature.ui.addBook
 
 import android.util.Log
+import com.sopt.anshim.domain.model.Book
 import com.sopt.anshim.feature.ui.util.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -14,13 +15,13 @@ class AddBookViewModel @Inject constructor(
     override fun reduceState(event: AddBookContract.Event) {
         when (event) {
             is AddBookContract.Event.SaveBook -> {
-                Log.e("AddBookViewModel", "SaveBook event received")
-                Log.e("AddBookViewModel", "event.book : ${event.book}")
+                Log.d("AddBookViewModel", "SaveBook event received")
+                Log.d("AddBookViewModel", "event.book : ${event.book}")
                 saveBook(event.book)
             }
             is AddBookContract.Event.SaveBookTemporarily -> {
-                Log.e("AddBookViewModel", "SaveBook event received")
-                Log.e("AddBookViewModel", "event.book : ${event.book}")
+                Log.d("AddBookViewModel", "SaveBookTemporarily event received")
+                Log.d("AddBookViewModel", "event.book : ${event.book}")
                 saveBookTemporarily(event.book)
             }
         }
