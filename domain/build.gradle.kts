@@ -8,3 +8,8 @@ java {
     targetCompatibility = JavaVersion.VERSION_21
 }
 
+dependencies {
+
+    implementation(projects.data.repository)
+
+}
