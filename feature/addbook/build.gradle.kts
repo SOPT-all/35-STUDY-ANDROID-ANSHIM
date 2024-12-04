@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.coinkiri.addbook"
+    namespace = "com.sopt.anshim.addbook"
     compileSdk = 34
 
     defaultConfig {
