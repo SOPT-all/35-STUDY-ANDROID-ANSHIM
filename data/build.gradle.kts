@@ -37,6 +37,8 @@ android {
 
 dependencies {
 
+    implementation(project(":domain"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -45,7 +47,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(libs.hilt)
-    implementation(project(":domain"))
     ksp(libs.hilt.compiler)
     implementation(libs.kotlinx.serialization.json)
 
