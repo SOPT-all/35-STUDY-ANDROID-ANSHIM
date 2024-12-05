@@ -1,6 +1,7 @@
-package com.sopt.anshim.main
+package com.sopt.anshim.core.navigation
 
 import kotlinx.serialization.Serializable
+
 @Serializable
 sealed class Screen {
     @Serializable

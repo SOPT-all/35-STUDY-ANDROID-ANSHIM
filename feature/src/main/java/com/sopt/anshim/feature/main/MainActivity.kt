@@ -1,4 +1,4 @@
-package com.sopt.anshim.main
+package com.sopt.anshim.feature.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
