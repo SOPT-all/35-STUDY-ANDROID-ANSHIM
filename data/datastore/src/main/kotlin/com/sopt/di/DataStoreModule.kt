@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DataSourceModule {
+object DataStoreModule {
 
     private val Context.bookDataStore: DataStore<Preferences> by preferencesDataStore(name = "book.pref")
 
