@@ -33,6 +33,8 @@ android {
 
 dependencies {
 
+    implementation(projects.data.datasource)
+
     implementation(projects.data.room)
     implementation(projects.data.remote)
     implementation(projects.data.datasource)
