@@ -8,4 +8,5 @@
     <string name="add_book_text_field_price">가격</string>
     <string name="add_book_text_field_publisher">출판사</string>
     <string name="add_book_text_field_description">소개</string>
+    <string name="add_book_button_save">저장하기</string>
 </resources>
