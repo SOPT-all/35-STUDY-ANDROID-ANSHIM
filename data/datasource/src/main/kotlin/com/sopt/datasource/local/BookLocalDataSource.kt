@@ -11,4 +11,8 @@ class BookLocalDataSource @Inject constructor(
     suspend fun saveBookTemporary(book: Book) {
         bookDataStore.saveBookTemporary(book)
     }
+
+    suspend fun getBookTemporary(): Book? {
+        return bookDataStore.getBookTemporary()
+    }
 }

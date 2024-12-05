@@ -11,4 +11,15 @@ class BookRepositoryImpl @Inject constructor(
     override suspend fun saveBookTemporary(book: Book) {
         bookLocalDataSource.saveBookTemporary(book)
     }
+
+    override suspend fun getBookTemporary(): Book {
+        return bookLocalDataSource.getBookTemporary() ?: Book(
+            title = "",
+            author = "",
+            price = "",
+            publisher = "",
+            description = "",
+            image = ""
+        )
+    }
 }
