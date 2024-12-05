@@ -1,6 +1,7 @@
 package com.sopt.anshim.addbook
 
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -28,6 +29,7 @@ import com.sopt.anshim.addbook.component.AddBookSaveButton
 import com.sopt.anshim.addbook.component.AddBookTopBar
 import com.sopt.anshim.addbook.component.TitledTextFieldGroup
 import com.sopt.anshim.addbook.component.dialog.GetSavedDataDialog
+import com.sopt.anshim.addbook.component.dialog.SaveDataDialog
 import com.sopt.anshim.addbook.type.AddBookEvent
 import com.sopt.anshim.addbook.type.AddBookSideEffect
 
@@ -35,7 +37,6 @@ import com.sopt.anshim.addbook.type.AddBookSideEffect
 fun AddBookScreen(
     modifier: Modifier = Modifier,
     naviToHome: () -> Unit = {},
-    onSaveButtonClick: () -> Unit = {},
     viewModel: AddHomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -45,13 +46,20 @@ fun AddBookScreen(
     LaunchedEffect(viewModel.sideEffect) {
         viewModel.sideEffect.flowWithLifecycle(lifecycle = lifecycleOwner.lifecycle)
             .collect { sideEffect ->
-                when(sideEffect) {
-                    is AddBookSideEffect.NavigateUp -> {}
+                when (sideEffect) {
+                    is AddBookSideEffect.NavigateUp -> {
+                        naviToHome()
+                    }
+
                     is AddBookSideEffect.ShowToast -> {
                         Toast.makeText(context, sideEffect.message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
+    }
+
+    BackHandler {
+        viewModel.onEvent(AddBookEvent.BackButtonClicked)
     }
 
     AddBookScreen(
@@ -75,9 +83,21 @@ fun AddBookScreen(
         onDescriptionChange = { newValue ->
             viewModel.onEvent(AddBookEvent.DescriptionChanged(newValue))
         },
-        onBackClick = naviToHome,
-        onSaveButtonClick = onSaveButtonClick,
+        onBackClick = { viewModel.onEvent(AddBookEvent.BackButtonClicked) },
+        onSaveButtonClick = { viewModel.onEvent(AddBookEvent.SaveButtonClicked) },
         modifier = modifier
+    )
+
+    GetSavedDataDialog(
+        isVisible = uiState.getSavedDataDialogVisibility,
+        onConfirmClick = { viewModel.onEvent(AddBookEvent.GetSavedDataDialogConfirmed) },
+        onDismissRequest = { viewModel.onEvent(AddBookEvent.GetSavedDataDialogDismissed) }
+    )
+
+    SaveDataDialog(
+        isVisible = uiState.saveDataDialogVisibility,
+        onConfirmClick = { viewModel.onEvent(AddBookEvent.SaveDataDialogConfirmed) },
+        onDismissRequest = { viewModel.onEvent(AddBookEvent.SaveDataDialogDismissed) }
     )
 }
 
@@ -189,6 +209,6 @@ private fun PreviewAddBookScreen() {
         onPublisherChange = { },
         onDescriptionChange = { },
         onBackClick = { },
-        onSaveButtonClick = {  }
+        onSaveButtonClick = { }
     )
 }

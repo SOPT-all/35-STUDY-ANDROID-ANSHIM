@@ -6,5 +6,7 @@ data class AddBookUiState(
     val author: String = "",
     val price: String = "",
     val publisher: String = "",
-    val description: String = ""
+    val description: String = "",
+    val getSavedDataDialogVisibility: Boolean = false,
+    val saveDataDialogVisibility: Boolean = false,
 )

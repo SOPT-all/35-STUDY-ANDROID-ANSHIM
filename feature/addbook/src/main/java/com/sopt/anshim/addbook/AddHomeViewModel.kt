@@ -1,6 +1,7 @@
 package com.sopt.anshim.addbook
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.sopt.anshim.addbook.state.AddBookUiState
 import com.sopt.anshim.addbook.type.AddBookEvent
 import com.sopt.anshim.addbook.type.AddBookSideEffect
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,6 +36,32 @@ class AddHomeViewModel @Inject constructor(
             is AddBookEvent.PublisherChanged -> updatePublisher(newValue = event.newValue)
 
             is AddBookEvent.DescriptionChanged -> updateDescription(newValue = event.newValue)
+
+            is AddBookEvent.SavedDataExistenceChecked -> {
+                if(checkTemporarilySavedDataExists()) {
+                    updateGetSavedDataDialogVisibility(true)
+                }
+            }
+
+            is AddBookEvent.GetSavedDataDialogConfirmed -> getTemporarilySavedData()
+
+            is AddBookEvent.GetSavedDataDialogDismissed -> {
+                deleteTemporarilySavedDate()
+                updateGetSavedDataDialogVisibility(false)
+            }
+
+            is AddBookEvent.BackButtonClicked -> updateSaveDataDialogVisibility(true)
+
+            is AddBookEvent.SaveDataDialogConfirmed -> {
+                updateSaveDataDialogVisibility(false)
+                navigateUp()
+            }
+
+            is AddBookEvent.SaveDataDialogDismissed -> updateSaveDataDialogVisibility(false)
+
+            is AddBookEvent.SaveButtonClicked -> {
+                saveData()
+            }
         }
     }
 
@@ -77,12 +105,66 @@ class AddHomeViewModel @Inject constructor(
         }
     }
 
+    private fun updateGetSavedDataDialogVisibility(newValue: Boolean) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                getSavedDataDialogVisibility = newValue
+            )
+        }
+    }
+
+    private fun updateSaveDataDialogVisibility(newValue: Boolean) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                saveDataDialogVisibility = newValue
+            )
+        }
+    }
+
+    /**TODO: 로컬에 저장된 데이터가 있는지 확인 경우*/
+    private fun checkTemporarilySavedDataExists(): Boolean {
+        return false
+    }
+
+    /**TODO: 사용자가 임시저장 불러오기를 선택하는 경우 */
+    private fun getTemporarilySavedData() {
+
+    }
+
+    /**TODO: 사용자가 임시저장 불러오기를 선택하지 않아 삭제되는 경우 */
+    private fun deleteTemporarilySavedDate() {
+
+    }
+
+    /**TODO: 사용자가 저장하기 버튼을 누르는 경우 */
+    private fun saveData() {
+        with(_uiState.value) {
+            if (title.isBlank() && author.isBlank()) {
+                showToast(SAVE_DISMISS_MESSAGE)
+            } else {
+                showToast(SAVE_CONFIRM_MESSAGE)
+                navigateUp()
+            }
+        }
+    }
+
+    private fun showToast(message: String) = viewModelScope.launch {
+        _sideEffect.emit(AddBookSideEffect.ShowToast(message))
+    }
+
+    private fun navigateUp() = viewModelScope.launch {
+        _sideEffect.emit(AddBookSideEffect.NavigateUp)
+    }
+
     companion object {
         private const val MAX_TITLE_LENGTH = 20
         private const val MAX_AUTHOR_LENGTH = 20
         private const val MAX_PRICE_LENGTH = 20
         private const val MAX_PUBLISH_LENGTH = 20
         private const val MAX_DESCRIPTION_LENGTH = 100
+
+        private const val SAVE_DISMISS_MESSAGE = "* 표시된 항목은 모두 입력해 주세요."
+        private const val SAVE_CONFIRM_MESSAGE = "저장되었습니다."
     }
 }
 
