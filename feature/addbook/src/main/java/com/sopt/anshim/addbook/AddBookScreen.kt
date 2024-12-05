@@ -1,8 +1,12 @@
 package com.sopt.anshim.addbook
 
+import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.Box
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,6 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
+import com.sopt.anshim.addbook.component.AddBookImageField
 import com.sopt.anshim.addbook.component.AddBookSaveButton
 import com.sopt.anshim.addbook.component.AddBookTopBar
 import com.sopt.anshim.addbook.component.TitledTextFieldGroup
@@ -32,6 +37,7 @@ import com.sopt.anshim.addbook.component.dialog.GetSavedDataDialog
 import com.sopt.anshim.addbook.component.dialog.SaveDataDialog
 import com.sopt.anshim.addbook.type.AddBookEvent
 import com.sopt.anshim.addbook.type.AddBookSideEffect
+import java.io.File
 
 @Composable
 fun AddBookScreen(
@@ -42,6 +48,14 @@ fun AddBookScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = LocalContext.current
+
+    val fileResultLauncher = uploadResultLauncher(
+        onImageSelected = { dataUri ->
+            val file = File(dataUri.toString())
+            Log.d("ImageResult", "Brought ${file.absolutePath}")
+            viewModel.onEvent(AddBookEvent.ImageChanged( newValue = dataUri))
+        }
+    )
 
     LaunchedEffect(viewModel.sideEffect) {
         viewModel.sideEffect.flowWithLifecycle(lifecycle = lifecycleOwner.lifecycle)
@@ -63,6 +77,7 @@ fun AddBookScreen(
     }
 
     AddBookScreen(
+        imageUri = uiState.imageUri,
         title = uiState.title,
         author = uiState.author,
         price = uiState.price,
@@ -85,6 +100,9 @@ fun AddBookScreen(
         },
         onBackClick = { viewModel.onEvent(AddBookEvent.BackButtonClicked) },
         onSaveButtonClick = { viewModel.onEvent(AddBookEvent.SaveButtonClicked) },
+        onImageClick = {
+            fileResultLauncher.launch("image/*")
+        },
         modifier = modifier
     )
 
@@ -103,6 +121,7 @@ fun AddBookScreen(
 
 @Composable
 private fun AddBookScreen(
+    imageUri: Uri?,
     title: String,
     author: String,
     price: String,
@@ -113,11 +132,13 @@ private fun AddBookScreen(
     onPriceChange: (String) -> Unit,
     onPublisherChange: (String) -> Unit,
     onDescriptionChange: (String) -> Unit,
+    onImageClick: () -> Unit,
     onBackClick: () -> Unit,
     onSaveButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val scrollState = rememberScrollState()
+
 
     Scaffold(
         topBar = {
@@ -138,11 +159,13 @@ private fun AddBookScreen(
                 .padding(innerPadding)
                 .verticalScroll(scrollState)
         ) {
-            Box(
+            AddBookImageField(
+                imageUri = imageUri,
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(2f)
                     .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+                    .clickable { onImageClick() },
             )
 
             TitledTextFieldGroup(
@@ -194,10 +217,20 @@ private fun AddBookScreen(
     }
 }
 
+@Composable
+private fun uploadResultLauncher(
+    onImageSelected: (Uri) -> Unit,
+) = rememberLauncherForActivityResult(
+    contract = ActivityResultContracts.GetContent()
+) { uri: Uri? ->
+    uri?.let(onImageSelected)
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun PreviewAddBookScreen() {
     AddBookScreen(
+        imageUri = null,
         title = "",
         author = "",
         price = "",
@@ -208,6 +241,7 @@ private fun PreviewAddBookScreen() {
         onPriceChange = { },
         onPublisherChange = { },
         onDescriptionChange = { },
+        onImageClick = {},
         onBackClick = { },
         onSaveButtonClick = { }
     )

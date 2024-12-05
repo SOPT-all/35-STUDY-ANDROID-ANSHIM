@@ -1,5 +1,7 @@
 package com.sopt.anshim.addbook.type
 
+import android.net.Uri
+
 /**
  * AddBookScreen의 사용자 이벤트
  *
@@ -14,6 +16,7 @@ package com.sopt.anshim.addbook.type
  */
 
 sealed class AddBookEvent {
+    data class ImageChanged(val newValue: Uri): AddBookEvent()
     data class TitleChanged(val newValue: String) : AddBookEvent()
     data class AuthorChanged(val newValue: String) : AddBookEvent()
     data class PriceChanged(val newValue: String) : AddBookEvent()

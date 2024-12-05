@@ -2,6 +2,7 @@
 <resources>
     <string name="add_book_top_bar_title">도서 추가</string>
     <string name="add_book_mark_compulsory">*</string>
+    <string name="add_book_image_hint">클릭해서 이미지를 추가하세요.</string>
     <string name="add_book_image">도서 사진</string>
     <string name="add_book_text_field_title">도서 제목</string>
     <string name="add_book_text_field_author">저자</string>

@@ -1,5 +1,6 @@
 package com.sopt.anshim.addbook
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.anshim.addbook.state.AddBookUiState
@@ -27,15 +28,17 @@ class AddHomeViewModel @Inject constructor(
 
     fun onEvent(event: AddBookEvent) {
         when (event) {
-            is AddBookEvent.TitleChanged -> updateTitle(newValue = event.newValue)
+            is AddBookEvent.ImageChanged -> updateImage(event.newValue)
 
-            is AddBookEvent.AuthorChanged -> updateAuthor(newValue = event.newValue)
+            is AddBookEvent.TitleChanged -> updateTitle(event.newValue)
 
-            is AddBookEvent.PriceChanged -> updatePrice(newValue = event.newValue)
+            is AddBookEvent.AuthorChanged -> updateAuthor(event.newValue)
 
-            is AddBookEvent.PublisherChanged -> updatePublisher(newValue = event.newValue)
+            is AddBookEvent.PriceChanged -> updatePrice(event.newValue)
 
-            is AddBookEvent.DescriptionChanged -> updateDescription(newValue = event.newValue)
+            is AddBookEvent.PublisherChanged -> updatePublisher(event.newValue)
+
+            is AddBookEvent.DescriptionChanged -> updateDescription(event.newValue)
 
             is AddBookEvent.SavedDataExistenceChecked -> {
                 if(checkTemporarilySavedDataExists()) {
@@ -62,6 +65,12 @@ class AddHomeViewModel @Inject constructor(
             is AddBookEvent.SaveButtonClicked -> {
                 saveData()
             }
+        }
+    }
+
+    private fun updateImage(newValue: Uri) {
+        _uiState.update { currentState ->
+            currentState.copy(imageUri = newValue)
         }
     }
 
