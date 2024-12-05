@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_fab_add_book">Add Book</string>
+    <string name="home_text_home_screen">Home Screen</string>
+    <string name="addbook_text_addbook_screen">AddBook Screen</string>
+</resources>
