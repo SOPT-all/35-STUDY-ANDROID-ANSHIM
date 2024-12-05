@@ -101,7 +101,11 @@ fun AddBookScreen(
                     .fillMaxWidth()
                     .height(400.dp)
                     .padding(top = 16.dp)
-                    .border(1.dp, Color.LightGray, shape = RoundedCornerShape(8.dp)),
+                    .border(
+                        1.dp,
+                        Color.LightGray,
+                        shape = RoundedCornerShape(8.dp)
+                    ),
                 contentScale = ContentScale.Fit
             )
             Spacer(modifier = Modifier.height(20.dp))
