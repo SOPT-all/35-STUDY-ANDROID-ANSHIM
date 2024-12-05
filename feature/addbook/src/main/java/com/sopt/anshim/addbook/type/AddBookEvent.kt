@@ -27,6 +27,7 @@ sealed class AddBookEvent {
     data object GetSavedDataDialogDismissed: AddBookEvent()
     data object BackButtonClicked : AddBookEvent()
     data object SaveDataDialogConfirmed: AddBookEvent()
+    data object SaveDataDialogDenied: AddBookEvent()
     data object SaveDataDialogDismissed: AddBookEvent()
     data object SaveButtonClicked: AddBookEvent()
 }

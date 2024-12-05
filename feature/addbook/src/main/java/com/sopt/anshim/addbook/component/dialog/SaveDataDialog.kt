@@ -10,12 +10,14 @@ import androidx.compose.ui.tooling.preview.Preview
 internal fun SaveDataDialog(
     isVisible: Boolean = false,
     onConfirmClick: () -> Unit,
+    onDenyClick: () -> Unit,
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     AnimatedVisibility(visible = isVisible) {
         CommonDialog(
             onConfirmClick = onConfirmClick,
+            onDismissClick = onDenyClick,
             onDismissRequest = onDismissRequest,
             modifier = modifier
         ) {
@@ -32,6 +34,7 @@ private fun GetSavedDataDialogPreview() {
     SaveDataDialog(
         isVisible = true,
         onConfirmClick = {},
+        onDenyClick = {},
         onDismissRequest = {}
     )
 }

@@ -115,6 +115,7 @@ fun AddBookScreen(
     SaveDataDialog(
         isVisible = uiState.saveDataDialogVisibility,
         onConfirmClick = { viewModel.onEvent(AddBookEvent.SaveDataDialogConfirmed) },
+        onDenyClick = { viewModel.onEvent(AddBookEvent.SaveDataDialogDenied)},
         onDismissRequest = { viewModel.onEvent(AddBookEvent.SaveDataDialogDismissed) }
     )
 }

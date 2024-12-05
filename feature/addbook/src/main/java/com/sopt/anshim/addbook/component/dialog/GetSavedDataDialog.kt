@@ -17,6 +17,7 @@ internal fun GetSavedDataDialog(
     AnimatedVisibility(visible = isVisible) {
         CommonDialog(
             onConfirmClick = onConfirmClick,
+            onDismissClick = onDismissRequest,
             onDismissRequest = onDismissRequest,
             properties = DialogProperties(
                 dismissOnBackPress = false,

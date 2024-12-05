@@ -26,6 +26,7 @@ import androidx.compose.ui.window.DialogProperties
 @Composable
 internal fun CommonDialog(
     onConfirmClick: () -> Unit,
+    onDismissClick: () -> Unit,
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
     properties: DialogProperties = DialogProperties(),
@@ -60,7 +61,7 @@ internal fun CommonDialog(
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Button(
-                    onClick = onDismissRequest,
+                    onClick = onDismissClick,
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.Gray
@@ -68,7 +69,7 @@ internal fun CommonDialog(
                     modifier = Modifier
                         .weight(1f)
                 ) {
-                    Text(text = "닫기")
+                    Text(text = "아니요")
                 }
 
                 Button(
@@ -89,6 +90,7 @@ internal fun CommonDialog(
 private fun CommonDialogPreview() {
     CommonDialog(
         onConfirmClick = {},
+        onDismissClick = {},
         onDismissRequest = {}
     ) {
         Text(text = "임시저장된 정보를 불러오겠습니까?")

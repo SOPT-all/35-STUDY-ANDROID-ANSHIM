@@ -40,7 +40,7 @@ internal fun AddBookTopBar(
             )
         },
         windowInsets = WindowInsets(left = 10.dp, right = 10.dp),
-        modifier = modifier.statusBarsPadding().shadow(elevation = 1.dp)
+        modifier = modifier.shadow(elevation = 1.dp).statusBarsPadding()
     )
 }
 

@@ -60,6 +60,11 @@ class AddHomeViewModel @Inject constructor(
                 navigateUp()
             }
 
+            is AddBookEvent.SaveDataDialogDenied -> {
+                updateSaveDataDialogVisibility(false)
+                navigateUp()
+            }
+
             is AddBookEvent.SaveDataDialogDismissed -> updateSaveDataDialogVisibility(false)
 
             is AddBookEvent.SaveButtonClicked -> {
