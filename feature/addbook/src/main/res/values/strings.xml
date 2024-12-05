@@ -2,4 +2,10 @@
 <resources>
     <string name="add_book_top_bar_title">도서 추가</string>
     <string name="add_book_mark_compulsory">*</string>
+    <string name="add_book_image">도서 사진</string>
+    <string name="add_book_text_field_title">도서 제목</string>
+    <string name="add_book_text_field_author">저자</string>
+    <string name="add_book_text_field_price">가격</string>
+    <string name="add_book_text_field_publisher">출판사</string>
+    <string name="add_book_text_field_description">소개</string>
 </resources>
