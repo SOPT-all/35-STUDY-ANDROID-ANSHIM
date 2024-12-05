@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -36,6 +37,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.sopt.anshim.domain.model.Book
+import com.sopt.anshim.feature.R
 import com.sopt.anshim.feature.ui.addBook.component.FilledTextField
 import com.sopt.anshim.feature.ui.addBook.component.ImageUploadField
 import com.sopt.anshim.feature.ui.addBook.component.NumericInputField
@@ -75,7 +77,7 @@ fun AddBookScreen(
 
     Column {
         AddBookTopBar(
-            "도서추가"
+            stringResource(id = R.string.addBook_topBar)
         )
         Column(
             modifier = Modifier
@@ -94,7 +96,7 @@ fun AddBookScreen(
             val imagePainter = rememberAsyncImagePainter(imageUrl.value)
             Image(
                 painter = imagePainter,
-                contentDescription = "Uploaded Book Image",
+                contentDescription = stringResource(id = R.string.addBook_image_upload_description),
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(400.dp)
@@ -106,19 +108,19 @@ fun AddBookScreen(
             FilledTextField(
                 text = title.value,
                 onValueChange = { title.value = it },
-                label = "도서 제목을 입력해 주세요."
+                label = stringResource(id = R.string.addBook_title)
             )
             Spacer(modifier = Modifier.height(20.dp))
             FilledTextField(
                 text = author.value,
                 onValueChange = { author.value = it },
-                label = "저자 이름을 입력해 주세요."
+                label = stringResource(id = R.string.addBook_author)
             )
             Spacer(modifier = Modifier.height(20.dp))
             FilledTextField(
                 text = description.value,
                 onValueChange = { description.value = it },
-                label = "도서 설명을 입력해 주세요."
+                label = stringResource(id = R.string.addBook_description)
             )
             Spacer(modifier = Modifier.height(20.dp))
             NumericInputField(
@@ -126,13 +128,13 @@ fun AddBookScreen(
                 onValueChange = { newValue ->
                     price.intValue = newValue.toIntOrNull() ?: 0
                 },
-                label = "도서 가격을 입력해 주세요."
+                label = stringResource(id = R.string.addBook_price)
             )
             Spacer(modifier = Modifier.height(20.dp))
             FilledTextField(
                 text = publisher.value,
                 onValueChange = { publisher.value = it },
-                label = "출판사를 입력해 주세요."
+                label = stringResource(id = R.string.addBook_publisher)
             )
             Spacer(modifier = Modifier.height(20.dp))
             Row(
@@ -159,7 +161,7 @@ fun AddBookScreen(
                     modifier = Modifier.padding(top = 8.dp)
                         .weight(1f)
                 ) {
-                    Text("저장")
+                    Text(stringResource(id = R.string.addBook_save))
                 }
 
                 Button(
@@ -182,7 +184,7 @@ fun AddBookScreen(
                     modifier = Modifier.padding(top = 8.dp)
                         .weight(1f)
                 ) {
-                    Text("임시저장")
+                    Text(stringResource(id = R.string.addBook_saveTemporarily))
                 }
             }
             Spacer(modifier = Modifier.height(20.dp))
