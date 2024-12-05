@@ -38,3 +38,4 @@ include(
     ":feature:home",
     ":feature:addbook"
 )
+include(":data:model")

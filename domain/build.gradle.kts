@@ -10,6 +10,6 @@ java {
 
 dependencies {
 
-    implementation(projects.data.repository)
+    api(projects.data.repository)
 
 }
