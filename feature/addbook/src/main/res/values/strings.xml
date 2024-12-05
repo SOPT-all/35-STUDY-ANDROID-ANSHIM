@@ -10,4 +10,9 @@
     <string name="add_book_text_field_publisher">출판사</string>
     <string name="add_book_text_field_description">소개</string>
     <string name="add_book_button_save">저장하기</string>
+
+    <string name="add_book_dialog_confirm">확인</string>
+    <string name="add_book_dialog_dismiss">아니요</string>
+    <string name="add_book_dialog_get_data">임시저장된 정보를 불러오겠습니까?</string>
+    <string name="add_book_dialog_save_data">데이터를 임시저장하시겠습니까?</string>
 </resources>

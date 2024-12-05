@@ -18,10 +18,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.sopt.anshim.addbook.R
 
 @Composable
 internal fun CommonDialog(
@@ -69,7 +71,7 @@ internal fun CommonDialog(
                     modifier = Modifier
                         .weight(1f)
                 ) {
-                    Text(text = "아니요")
+                    Text(text = stringResource(R.string.add_book_dialog_dismiss))
                 }
 
                 Button(
@@ -78,7 +80,7 @@ internal fun CommonDialog(
                     modifier = Modifier
                         .weight(1f)
                 ) {
-                    Text(text = "확인")
+                    Text(text = stringResource(R.string.add_book_dialog_confirm))
                 }
             }
         }

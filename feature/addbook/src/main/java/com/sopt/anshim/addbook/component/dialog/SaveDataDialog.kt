@@ -4,7 +4,9 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.sopt.anshim.addbook.R
 
 @Composable
 internal fun SaveDataDialog(
@@ -21,9 +23,8 @@ internal fun SaveDataDialog(
             onDismissRequest = onDismissRequest,
             modifier = modifier
         ) {
-            Text(
-                text = "데이터를 임시저장하시겠습니까?"
-            )
+
+            Text(text = stringResource(R.string.add_book_dialog_save_data))
         }
     }
 }
