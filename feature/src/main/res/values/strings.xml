@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="addBook_image_upload_description">Uploaded Book Image</string>
+    <string name="addBook_topBar">도서추가</string>
+    <string name="addBook_title">도서 제목을 입력해 주세요.</string>
+    <string name="addBook_author">저자 이름을 입력해 주세요.</string>
+    <string name="addBook_description">도서 설명을 입력해 주세요.</string>
+    <string name="addBook_price">도서 가격을 입력해 주세요.</string>
+    <string name="addBook_publisher">출판사를 입력해 주세요.</string>
+    <string name="addBook_save">저장</string>
+    <string name="addBook_saveTemporarily">임시저장</string>
     <string name="home_fab_add_book">Add Book</string>
     <string name="home_text_home_screen">Home Screen</string>
     <string name="addbook_text_addbook_screen">AddBook Screen</string>
