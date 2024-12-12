@@ -1,4 +1,4 @@
-package com.sopt.anshim.feature.ui.util
+package com.sopt.anshim.feature.util
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

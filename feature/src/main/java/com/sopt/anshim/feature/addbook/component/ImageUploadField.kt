@@ -1,4 +1,4 @@
-package com.sopt.anshim.feature.ui.addBook.component
+package com.sopt.anshim.feature.addbook.component
 
 import android.app.Activity
 import android.content.Context
