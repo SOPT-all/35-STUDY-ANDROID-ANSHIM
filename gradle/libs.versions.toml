@@ -24,6 +24,7 @@ retrofitKotlinSerializationConverter = "1.0.0"
 coil = "2.2.2"
 navigationCommonKtx = "2.8.4"
 navigationCompose = "2.8.4"
+room = "2.5.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -58,6 +59,9 @@ retrofit-kotlin-serialization-converter = { group = "com.jakewharton.retrofit", 
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 androidx-navigation-common-ktx = { group = "androidx.navigation", name = "navigation-common-ktx", version.ref = "navigationCommonKtx" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room"}
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room"}
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
