@@ -5,8 +5,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.sopt.anshim.core.navigation.Screen
-import com.sopt.anshim.feature.addbook.AddBookScreen
 import com.sopt.anshim.feature.home.HomeScreen
+import com.sopt.anshim.feature.ui.addBook.AddBookScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
@@ -19,7 +19,9 @@ fun NavGraph(navController: NavHostController) {
             )
         }
         composable<Screen.AddBook> {
-            AddBookScreen()
+            AddBookScreen(
+                navController
+            )
         }
     }
 }
