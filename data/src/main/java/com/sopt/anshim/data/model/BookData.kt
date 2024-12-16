@@ -1,5 +1,8 @@
 package com.sopt.anshim.data.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class BookData(
     val title: String? = null,
     val author: String? = null,

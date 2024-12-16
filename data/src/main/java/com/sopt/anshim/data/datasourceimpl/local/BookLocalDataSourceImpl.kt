@@ -1,5 +1,6 @@
 package com.sopt.anshim.data.datasourceimpl.local
 
+import android.util.Log
 import com.sopt.anshim.data.datasource.local.BookLocalDataSource
 import com.sopt.anshim.data.datastore.BookDataStore
 import com.sopt.anshim.data.model.BookData
@@ -11,6 +12,8 @@ class BookLocalDataSourceImpl @Inject constructor(
     override suspend fun saveBookTemporarily(bookData: BookData) =
         bookDataStore.saveBookTemporarily(bookData)
 
-    override suspend fun getBookTemporarily(): BookData? =
-        bookDataStore.getBookTemporarily()
+    override suspend fun getBookTemporarily(): BookData? {
+        val data = bookDataStore.getBookTemporarily()
+        return data
+    }
 }

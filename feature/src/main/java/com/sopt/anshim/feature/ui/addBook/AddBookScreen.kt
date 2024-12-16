@@ -30,7 +30,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -163,7 +162,8 @@ fun AddBookScreen(
                         )
                     },
                     enabled = title.value.isNotBlank() && author.value.isNotBlank(),
-                    modifier = Modifier.padding(top = 8.dp)
+                    modifier = Modifier
+                        .padding(top = 8.dp)
                         .weight(1f)
                 ) {
                     Text(stringResource(id = R.string.addBook_save))
@@ -186,7 +186,8 @@ fun AddBookScreen(
                             )
                         }
                     },
-                    modifier = Modifier.padding(top = 8.dp)
+                    modifier = Modifier
+                        .padding(top = 8.dp)
                         .weight(1f)
                 ) {
                     Text(stringResource(id = R.string.addBook_saveTemporarily))
@@ -218,14 +219,4 @@ private fun AddBookTopBar(
             textAlign = TextAlign.Center
         )
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun AddBookScreenPreview() {
-    val viewModel = AddBookViewModel()
-    AddBookScreen(
-        navController = NavController(LocalContext.current),
-        viewModel = viewModel
-    )
 }
