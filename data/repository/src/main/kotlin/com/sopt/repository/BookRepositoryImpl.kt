@@ -5,7 +5,7 @@ import com.sopt.model.book.Book
 import javax.inject.Inject
 
 class BookRepositoryImpl @Inject constructor(
-    private val bookLocalDataSource: BookLocalDataSource
+    private val bookLocalDataSource: BookLocalDataSource,
 ) : BookRepository {
 
     override suspend fun saveBookTemporary(book: Book) {
@@ -22,4 +22,13 @@ class BookRepositoryImpl @Inject constructor(
             image = ""
         )
     }
+
+    override suspend fun saveBook(book: Book) =
+        bookLocalDataSource.saveBook(book)
+
+    override suspend fun getAllBooks(): List<Book> =
+        bookLocalDataSource.getAllBooks()
+
+    override suspend fun deleteBook(book: Book) =
+        bookLocalDataSource.deleteBook(book)
 }
