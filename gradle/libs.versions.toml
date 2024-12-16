@@ -25,6 +25,8 @@ coil = "2.2.2"
 navigationCommonKtx = "2.8.4"
 navigationCompose = "2.8.4"
 
+preferencesDatastore = "1.1.1"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -58,6 +60,8 @@ retrofit-kotlin-serialization-converter = { group = "com.jakewharton.retrofit", 
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 androidx-navigation-common-ktx = { group = "androidx.navigation", name = "navigation-common-ktx", version.ref = "navigationCommonKtx" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "preferencesDatastore"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
