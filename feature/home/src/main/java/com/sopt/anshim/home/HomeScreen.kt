@@ -9,26 +9,55 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.flowWithLifecycle
 import com.sopt.anshim.home.component.HomeBookGroup
 import com.sopt.anshim.home.component.HomeFloatingButton
 import com.sopt.anshim.home.component.HomeTopBar
+import com.sopt.anshim.home.contract.HomeUiEvent
+import com.sopt.anshim.home.contract.HomeUiSideEffect
 import com.sopt.model.book.Book
 
 @Composable
 fun HomeRoute(
     navToAddBook: () -> Unit,
     modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = hiltViewModel(),
     navToDetail: (Book) -> Unit = {},
 ) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val lifecycleOwner = LocalLifecycleOwner.current
+
+    LaunchedEffect(viewModel.sideEffect, lifecycleOwner) {
+        viewModel.sideEffect.flowWithLifecycle(lifecycle = lifecycleOwner.lifecycle)
+            .collect{ sideEffect ->
+                when(sideEffect) {
+                    HomeUiSideEffect.NavigateToAddBook -> {
+                        navToAddBook()
+                    }
+                    is HomeUiSideEffect.NavigateToDetail -> {
+                        navToDetail(sideEffect.book)
+                    }
+                }
+            }
+    }
 
     HomeScreen(
-        bookList = emptyList(),
-        onFabClick = navToAddBook,
-        onBookClick = navToDetail,
+        bookList = uiState.books,
+        onFabClick ={
+            viewModel.handleEvent(HomeUiEvent.OnClickFAB)
+        },
+        onBookClick = { book ->
+            viewModel.handleEvent(HomeUiEvent.OnSelectBook(book))
+        },
         modifier = modifier
     )
 }
