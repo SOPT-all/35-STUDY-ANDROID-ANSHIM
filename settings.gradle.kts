@@ -11,6 +11,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -20,5 +21,21 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Anshim"
-include(":app")
- 
+include(
+    ":app",
+
+    ":core:common",
+    ":core:designsystem",
+
+    ":data:datasource",
+    ":data:datastore",
+    ":data:remote",
+    ":data:repository",
+    ":data:room",
+
+    ":domain",
+
+    ":feature:home",
+    ":feature:addbook"
+)
+include(":data:model")
