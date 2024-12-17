@@ -37,6 +37,7 @@ android {
 dependencies {
 
     implementation(projects.data.repository)
+    implementation(projects.core.designsystem)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

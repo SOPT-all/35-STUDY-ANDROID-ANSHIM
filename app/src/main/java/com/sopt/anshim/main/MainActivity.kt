@@ -9,7 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.sopt.anshim.addbook.AddBookScreen
 import com.sopt.anshim.designsystem.theme.AnshimTheme
-import com.sopt.anshim.home.HomeScreen
+import com.sopt.anshim.home.HomeRoute
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     startDestination = Route.Home
                 ) {
                     composable<Route.Home> {
-                        HomeScreen(
+                        HomeRoute(
                             navToAddBook = { navigator.navigate(Route.AddBook) }
                         )
                     }
