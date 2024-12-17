@@ -72,6 +72,10 @@ fun AddBookScreen(
             }
     }
 
+    LaunchedEffect(true) {
+        viewModel.onEvent(AddBookEvent.SavedDataExistenceChecked)
+    }
+
     BackHandler {
         viewModel.onEvent(AddBookEvent.BackButtonClicked)
     }
