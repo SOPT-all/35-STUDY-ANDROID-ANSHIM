@@ -36,6 +36,7 @@ android {
 dependencies {
 
     api(projects.data.datastore)
+    implementation(projects.data.room)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

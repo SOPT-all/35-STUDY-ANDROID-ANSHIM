@@ -1,6 +1,7 @@
 package com.sopt.anshim.addbook
 
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
@@ -41,7 +43,7 @@ import com.sopt.anshim.addbook.type.AddBookSideEffect
 fun AddBookScreen(
     modifier: Modifier = Modifier,
     naviToHome: () -> Unit = {},
-    viewModel: AddHomeViewModel = hiltViewModel()
+    viewModel: AddBookViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -103,7 +105,7 @@ fun AddBookScreen(
         onImageClick = {
             fileResultLauncher.launch("image/*")
         },
-        modifier = modifier
+        modifier = modifier.imePadding()
     )
 
     GetSavedDataDialog(
@@ -115,7 +117,7 @@ fun AddBookScreen(
     SaveDataDialog(
         isVisible = uiState.saveDataDialogVisibility,
         onConfirmClick = { viewModel.onEvent(AddBookEvent.SaveDataDialogConfirmed) },
-        onDenyClick = { viewModel.onEvent(AddBookEvent.SaveDataDialogDenied)},
+        onDenyClick = { viewModel.onEvent(AddBookEvent.SaveDataDialogDenied) },
         onDismissRequest = { viewModel.onEvent(AddBookEvent.SaveDataDialogDismissed) }
     )
 }
@@ -139,7 +141,6 @@ private fun AddBookScreen(
     modifier: Modifier = Modifier,
 ) {
     val scrollState = rememberScrollState()
-
 
     Scaffold(
         topBar = {
