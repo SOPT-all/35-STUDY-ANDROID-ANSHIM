@@ -39,3 +39,4 @@ include(
     ":feature:addbook"
 )
 include(":data:model")
+include(":feature:bookdetail")
