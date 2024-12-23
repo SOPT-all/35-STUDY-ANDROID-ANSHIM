@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.anshim.addbook.state.AddBookUiState
 import com.sopt.anshim.addbook.type.AddBookEvent
 import com.sopt.anshim.addbook.type.AddBookSideEffect
+import com.sopt.model.book.Book
+import com.sopt.repository.BookRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,8 +18,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddHomeViewModel @Inject constructor(
-
+class AddBookViewModel @Inject constructor(
+    private val bookRepository: BookRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AddBookUiState())
@@ -41,7 +43,7 @@ class AddHomeViewModel @Inject constructor(
             is AddBookEvent.DescriptionChanged -> updateDescription(event.newValue)
 
             is AddBookEvent.SavedDataExistenceChecked -> {
-                if(checkTemporarilySavedDataExists()) {
+                if (checkTemporarilySavedDataExists()) {
                     updateGetSavedDataDialogVisibility(true)
                 }
             }
@@ -152,12 +154,24 @@ class AddHomeViewModel @Inject constructor(
 
     /**TODO: 사용자가 저장하기 버튼을 누르는 경우 */
     private fun saveData() {
-        with(_uiState.value) {
-            if (title.isBlank() && author.isBlank()) {
-                showToast(SAVE_DISMISS_MESSAGE)
-            } else {
-                showToast(SAVE_CONFIRM_MESSAGE)
-                navigateUp()
+        viewModelScope.launch {
+            with(_uiState.value) {
+                if (title.isBlank() && author.isBlank()) {
+                    showToast(SAVE_DISMISS_MESSAGE)
+                } else {
+                    showToast(SAVE_CONFIRM_MESSAGE)
+                    bookRepository.saveBook(
+                        book = Book(
+                            title = _uiState.value.title,
+                            author = _uiState.value.author,
+                            price = _uiState.value.price,
+                            publisher = _uiState.value.publisher,
+                            description = _uiState.value.description,
+                            image = _uiState.value.imageUri.toString()
+                        )
+                    )
+                    navigateUp()
+                }
             }
         }
     }
@@ -181,4 +195,3 @@ class AddHomeViewModel @Inject constructor(
         private const val SAVE_CONFIRM_MESSAGE = "저장되었습니다."
     }
 }
-
