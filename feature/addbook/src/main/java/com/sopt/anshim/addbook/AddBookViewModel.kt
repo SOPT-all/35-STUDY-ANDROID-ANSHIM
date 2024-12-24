@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddBookViewModel @Inject constructor(
-    private val bookRepository: BookRepository,
+    private val bookRepository: BookRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(AddBookUiState())
@@ -28,7 +28,7 @@ class AddBookViewModel @Inject constructor(
     private val _sideEffect = MutableSharedFlow<AddBookSideEffect>()
     val sideEffect = _sideEffect.asSharedFlow()
 
-    fun onEvent(event: AddBookEvent) {
+    fun onEvent(event: AddBookEvent) = viewModelScope.launch {
         when (event) {
             is AddBookEvent.ImageChanged -> updateImage(event.newValue)
 
@@ -42,22 +42,32 @@ class AddBookViewModel @Inject constructor(
 
             is AddBookEvent.DescriptionChanged -> updateDescription(event.newValue)
 
+            is AddBookEvent.BackButtonClicked -> {
+                if (isAllFieldBlank()) {
+                    navigateUp()
+                } else {
+                    updateSaveDataDialogVisibility(true)
+                }
+            }
+
             is AddBookEvent.SavedDataExistenceChecked -> {
-                if (checkTemporarilySavedDataExists()) {
+                if (isTemporarilySavedDataExists()) {
                     updateGetSavedDataDialogVisibility(true)
                 }
             }
 
-            is AddBookEvent.GetSavedDataDialogConfirmed -> getTemporarilySavedData()
+            is AddBookEvent.GetSavedDataDialogConfirmed -> {
+                getTemporarilySavedData()
+                updateGetSavedDataDialogVisibility(false)
+            }
 
             is AddBookEvent.GetSavedDataDialogDismissed -> {
                 deleteTemporarilySavedDate()
                 updateGetSavedDataDialogVisibility(false)
             }
 
-            is AddBookEvent.BackButtonClicked -> updateSaveDataDialogVisibility(true)
-
             is AddBookEvent.SaveDataDialogConfirmed -> {
+                temporarilySaveData()
                 updateSaveDataDialogVisibility(false)
                 navigateUp()
             }
@@ -137,19 +147,54 @@ class AddBookViewModel @Inject constructor(
         }
     }
 
-    /**TODO: 로컬에 저장된 데이터가 있는지 확인 경우*/
-    private fun checkTemporarilySavedDataExists(): Boolean {
-        return false
+    private suspend fun isTemporarilySavedDataExists(): Boolean {
+        val bookData = bookRepository.getBookTemporary()
+        return bookData.title.isNotBlank()
     }
 
-    /**TODO: 사용자가 임시저장 불러오기를 선택하는 경우 */
-    private fun getTemporarilySavedData() {
+    private suspend fun getTemporarilySavedData() {
+        with(bookRepository.getBookTemporary()) {
+            _uiState.update { currentState ->
+                currentState.copy(
+                    imageUri = Uri.parse(image).takeIf { image.isNotBlank() },
+                    title = title,
+                    author = author,
+                    price = price,
+                    publisher = publisher,
+                    description = description,
 
+                    )
+            }
+        }
     }
 
-    /**TODO: 사용자가 임시저장 불러오기를 선택하지 않아 삭제되는 경우 */
-    private fun deleteTemporarilySavedDate() {
+    private suspend fun deleteTemporarilySavedDate() {
+        bookRepository.saveBookTemporary(
+            book = Book(
+                image = "",
+                title = "",
+                author = "",
+                price = "",
+                description = "",
+                publisher = ""
+            )
 
+        )
+    }
+
+    private suspend fun temporarilySaveData() {
+        bookRepository.saveBookTemporary(
+            book = with(_uiState.value) {
+                Book(
+                    image = imageUri?.path.orEmpty(),
+                    title = title,
+                    author = author,
+                    price = price,
+                    description = description,
+                    publisher = publisher
+                )
+            }
+        )
     }
 
     /**TODO: 사용자가 저장하기 버튼을 누르는 경우 */
@@ -176,12 +221,16 @@ class AddBookViewModel @Inject constructor(
         }
     }
 
-    private fun showToast(message: String) = viewModelScope.launch {
+    private suspend fun showToast(message: String) {
         _sideEffect.emit(AddBookSideEffect.ShowToast(message))
     }
 
-    private fun navigateUp() = viewModelScope.launch {
+    private suspend fun navigateUp() {
         _sideEffect.emit(AddBookSideEffect.NavigateUp)
+    }
+
+    private fun isAllFieldBlank(): Boolean = with(_uiState.value) {
+        title.isBlank() && author.isBlank() && price.isBlank() && publisher.isBlank() && description.isBlank()
     }
 
     companion object {
@@ -195,3 +244,4 @@ class AddBookViewModel @Inject constructor(
         private const val SAVE_CONFIRM_MESSAGE = "저장되었습니다."
     }
 }
+

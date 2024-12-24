@@ -38,7 +38,6 @@ import com.sopt.anshim.addbook.component.dialog.GetSavedDataDialog
 import com.sopt.anshim.addbook.component.dialog.SaveDataDialog
 import com.sopt.anshim.addbook.type.AddBookEvent
 import com.sopt.anshim.addbook.type.AddBookSideEffect
-import java.io.File
 
 @Composable
 fun AddBookScreen(
@@ -52,9 +51,7 @@ fun AddBookScreen(
 
     val fileResultLauncher = uploadResultLauncher(
         onImageSelected = { dataUri ->
-            val file = File(dataUri.toString())
-            Log.d("ImageResult", "Brought ${file.absolutePath}")
-            viewModel.onEvent(AddBookEvent.ImageChanged(newValue = dataUri))
+            viewModel.onEvent(AddBookEvent.ImageChanged( newValue = dataUri))
         }
     )
 
@@ -71,6 +68,10 @@ fun AddBookScreen(
                     }
                 }
             }
+    }
+
+    LaunchedEffect(true) {
+        viewModel.onEvent(AddBookEvent.SavedDataExistenceChecked)
     }
 
     BackHandler {
