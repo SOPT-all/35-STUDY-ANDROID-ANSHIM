@@ -3,6 +3,7 @@ package com.sopt.anshim.addbook.state
 import android.net.Uri
 
 data class AddBookUiState(
+    val id: Long = 0,
     val imageUri: Uri? = null,
     val title: String = "",
     val author: String = "",

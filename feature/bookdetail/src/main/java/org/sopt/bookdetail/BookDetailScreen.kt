@@ -39,29 +39,29 @@ fun BookDetailScreen(
 
     val book by viewModel.book.collectAsStateWithLifecycle()
     val context = LocalContext.current
-//    val bitmap = remember {
-//        ImageDecoder.decodeBitmap(
-//            ImageDecoder.createSource(context.contentResolver, book.image.toUri())
-//        )
-//    }
+    val bitmap = remember {
+        ImageDecoder.decodeBitmap(
+            ImageDecoder.createSource(context.contentResolver, book.image.toUri())
+        )
+    }
     Column(
         modifier = modifier.verticalScroll(rememberScrollState())
     ) {
-//        Image(
-//            modifier = Modifier
-//                .align(Alignment.CenterHorizontally)
-//                .width(200.dp)
-//                .aspectRatio(1f),
-//            bitmap = bitmap.asImageBitmap(),
-//            contentDescription = null
-//        )
-        Box(
+        Image(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .width(200.dp)
-                .aspectRatio(1f)
-                .background(Color.Blue)
+                .aspectRatio(1f),
+            bitmap = bitmap.asImageBitmap(),
+            contentDescription = null
         )
+//        Box(
+//            modifier = Modifier
+//                .align(Alignment.CenterHorizontally)
+//                .width(200.dp)
+//                .aspectRatio(1f)
+//                .background(Color.Blue)
+//        )
 
         Text(
             text = book.title,

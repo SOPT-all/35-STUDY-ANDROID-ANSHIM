@@ -16,6 +16,7 @@ fun Book.toEntity(): BookEntity {
 
 fun BookEntity.toDomain(): Book {
     return Book(
+        id = this.id,
         title = this.title,
         author = this.author,
         price = this.price,

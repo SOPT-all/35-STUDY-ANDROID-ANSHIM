@@ -171,6 +171,7 @@ class AddBookViewModel @Inject constructor(
     private suspend fun deleteTemporarilySavedDate() {
         bookRepository.saveBookTemporary(
             book = Book(
+                id = 0,
                 image = "",
                 title = "",
                 author = "",
@@ -186,12 +187,13 @@ class AddBookViewModel @Inject constructor(
         bookRepository.saveBookTemporary(
             book = with(_uiState.value) {
                 Book(
+                    id = id,
                     image = imageUri?.path.orEmpty(),
                     title = title,
                     author = author,
                     price = price,
                     description = description,
-                    publisher = publisher
+                    publisher = publisher,
                 )
             }
         )
@@ -207,6 +209,7 @@ class AddBookViewModel @Inject constructor(
                     showToast(SAVE_CONFIRM_MESSAGE)
                     bookRepository.saveBook(
                         book = Book(
+                            id = _uiState.value.id,
                             title = _uiState.value.title,
                             author = _uiState.value.author,
                             price = _uiState.value.price,

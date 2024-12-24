@@ -32,5 +32,9 @@ class BookLocalDataSource @Inject constructor(
         val bookEntity = book.toEntity()
         bookDao.deleteBook(bookEntity)
     }
+
+    suspend fun getBook(id: Long): Book {
+        return bookDao.getBook(id).toDomain()
+    }
 }
 

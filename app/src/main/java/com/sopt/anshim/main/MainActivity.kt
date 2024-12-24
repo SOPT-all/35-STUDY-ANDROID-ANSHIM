@@ -31,7 +31,8 @@ class MainActivity : ComponentActivity() {
                 ) {
                     composable<Route.Home> {
                         HomeRoute(
-                            navToAddBook = { navigator.navigate(Route.AddBook) }
+                            navToAddBook = { navigator.navigate(Route.AddBook) },
+                            navToDetail = { navigator.navigate(org.sopt.bookdetail.Route.BookDetail(it)) }
                         )
                     }
 

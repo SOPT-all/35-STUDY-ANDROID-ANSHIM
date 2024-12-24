@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor(
                 _sideEffect.emit(HomeUiSideEffect.NavigateToAddBook)
             }
             is HomeUiEvent.OnSelectBook -> {
-                _sideEffect.emit(HomeUiSideEffect.NavigateToDetail(event.book))
+                _sideEffect.emit(HomeUiSideEffect.NavigateToDetail(event.book.id))
             }
         }
     }

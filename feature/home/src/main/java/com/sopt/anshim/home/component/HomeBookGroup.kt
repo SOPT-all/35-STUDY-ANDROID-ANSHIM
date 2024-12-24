@@ -73,7 +73,8 @@ private fun HomeBookGroupPreview() {
             image = "",
             price = "10,000",
             publisher = "",
-            description = ""
+            description = "",
+            id = 0
         )
     )
 }

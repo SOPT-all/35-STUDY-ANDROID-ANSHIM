@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 sealed interface Route {
     @Serializable
-    data class BookDetail(val bookId: Int) : Route
+    data class BookDetail(val bookId: Long) : Route
 }

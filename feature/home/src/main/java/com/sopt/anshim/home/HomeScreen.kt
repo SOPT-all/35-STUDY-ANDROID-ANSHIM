@@ -31,7 +31,7 @@ fun HomeRoute(
     navToAddBook: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
-    navToDetail: (Book) -> Unit = {},
+    navToDetail: (Long) -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -44,7 +44,7 @@ fun HomeRoute(
                         navToAddBook()
                     }
                     is HomeUiSideEffect.NavigateToDetail -> {
-                        navToDetail(sideEffect.book)
+                        navToDetail(sideEffect.bookId)
                     }
                 }
             }
@@ -111,7 +111,8 @@ private fun PreviewHomeScreen() {
                 image = "",
                 price = "10,000",
                 publisher = "",
-                description = ""
+                description = "",
+                id = 0L
             ),
             Book(
                 title = "안심이 프로젝트",
@@ -119,7 +120,8 @@ private fun PreviewHomeScreen() {
                 image = "",
                 price = "10,000",
                 publisher = "",
-                description = ""
+                description = "",
+                id = 0L
             ),
             Book(
                 title = "안심이 프로젝트",
@@ -127,7 +129,8 @@ private fun PreviewHomeScreen() {
                 image = "",
                 price = "10,000",
                 publisher = "",
-                description = ""
+                description = "",
+                id = 0L
             ),
         )
     )

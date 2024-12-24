@@ -4,5 +4,5 @@ import com.sopt.model.book.Book
 
 sealed class HomeUiSideEffect {
     data object NavigateToAddBook: HomeUiSideEffect()
-    data class NavigateToDetail(val book: Book): HomeUiSideEffect()
+    data class NavigateToDetail(val bookId: Long): HomeUiSideEffect()
 }

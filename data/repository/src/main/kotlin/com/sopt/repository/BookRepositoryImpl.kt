@@ -14,6 +14,7 @@ class BookRepositoryImpl @Inject constructor(
 
     override suspend fun getBookTemporary(): Book {
         return bookLocalDataSource.getBookTemporary() ?: Book(
+            id = 0L,
             title = "",
             author = "",
             price = "",
@@ -31,4 +32,8 @@ class BookRepositoryImpl @Inject constructor(
 
     override suspend fun deleteBook(book: Book) =
         bookLocalDataSource.deleteBook(book)
+
+    override suspend fun getBook(id: Long): Book {
+        return bookLocalDataSource.getBook(id)
+    }
 }

@@ -9,4 +9,6 @@ interface BookRepository {
     suspend fun saveBook(book: Book)
     suspend fun getAllBooks(): List<Book>
     suspend fun deleteBook(book: Book)
+
+    suspend fun getBook(id: Long): Book
 }
