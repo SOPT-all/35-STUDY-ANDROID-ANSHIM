@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddHomeViewModel @Inject constructor(
+class AddBookViewModel @Inject constructor(
     private val bookRepository: BookRepository
 ) : ViewModel() {
 
