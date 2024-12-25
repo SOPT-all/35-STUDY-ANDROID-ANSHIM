@@ -12,4 +12,8 @@ internal class BookRepositoryImpl @Inject constructor(
     override suspend fun addBook(book: Book) {
         bookLocalDataSource.addBook(book.toBookEntity())
     }
+
+    override suspend fun deleteBook(book: Book) {
+        bookLocalDataSource.deleteBook(book.toBookEntity())
+    }
 }
