@@ -21,7 +21,8 @@ class BookDetailContract {
     ) : UiState
 
     sealed class Event : UiEvent {
-        data class DeleteBook(val book: Book) : Event()
+        data object DeleteBook : Event()
+        data object LoadBookDetail : Event()
     }
 
     sealed class Effect : UiEffect {

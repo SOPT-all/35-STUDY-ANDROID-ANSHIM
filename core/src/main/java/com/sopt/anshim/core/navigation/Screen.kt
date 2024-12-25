@@ -11,6 +11,6 @@ sealed class Screen {
     data object AddBook : Screen()
 
     @Serializable
-    data object BookDetail : Screen()
+    data class BookDetail(val bookId: Int) : Screen()
 
 }

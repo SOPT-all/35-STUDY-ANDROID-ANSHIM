@@ -1,12 +1,14 @@
 package com.sopt.anshim.feature.bookdetail
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -34,6 +36,9 @@ fun BookDetailScreen(
 ) {
     val effectFlow = viewModel.effect
     val bookDetailState by viewModel.uiState.collectAsStateWithLifecycle()
+    viewModel.sendEvent(
+        BookDetailContract.Event.LoadBookDetail
+    )
     LaunchedEffect(Unit) {
         effectFlow.collectLatest { effect ->
             when (effect) {
@@ -52,13 +57,22 @@ fun BookDetailScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        val imagePainter = rememberAsyncImagePainter(
+            model = bookDetailState.book.imageUrl
+        )
         Image(
-            painter = rememberAsyncImagePainter(bookDetailState.book.imageUrl),
+            painter = imagePainter,
             contentDescription = "",
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp),
-            contentScale = ContentScale.Crop
+                .height(400.dp)
+                .padding(top = 16.dp)
+                .border(
+                    1.dp,
+                    Color.LightGray,
+                    shape = RoundedCornerShape(8.dp)
+                ),
+            contentScale = ContentScale.Fit
         )
         Text(
             text = bookDetailState.book.title,
@@ -101,9 +115,7 @@ fun BookDetailScreen(
         Button(
             onClick = {
                 viewModel.sendEvent(
-                    BookDetailContract.Event.DeleteBook(
-                        viewModel.uiState.value.book
-                    )
+                    BookDetailContract.Event.DeleteBook
                 )
             },
             modifier = Modifier.align(Alignment.CenterHorizontally)
