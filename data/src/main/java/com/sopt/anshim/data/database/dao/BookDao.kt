@@ -13,5 +13,5 @@ internal interface BookDao {
     fun getAllBooks(): Flow<List<BookEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAreaCode(book: BookEntity)
+    suspend fun insertBook(book: BookEntity)
 }
