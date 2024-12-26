@@ -1,7 +1,7 @@
 package com.sopt.anshim.addbook
 
+import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -51,7 +51,11 @@ fun AddBookScreen(
 
     val fileResultLauncher = uploadResultLauncher(
         onImageSelected = { dataUri ->
-            viewModel.onEvent(AddBookEvent.ImageChanged( newValue = dataUri))
+            context.contentResolver.takePersistableUriPermission(
+                dataUri,
+                Intent.FLAG_GRANT_READ_URI_PERMISSION
+            )
+            viewModel.onEvent(AddBookEvent.ImageChanged(newValue = dataUri))
         }
     )
 
