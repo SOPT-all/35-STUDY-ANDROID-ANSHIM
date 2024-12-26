@@ -29,7 +29,6 @@ import com.sopt.model.book.Book
 @Composable
 fun HomeRoute(
     navToAddBook: () -> Unit,
-    navToDetail: (Book) -> Unit = {},
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
     navToDetail: (Long) -> Unit = {},
