@@ -146,12 +146,12 @@ fun AddBookScreen(
                         viewModel.sendEvent(
                             AddBookContract.Event.SaveBook(
                                 Book(
-                                    title.value,
-                                    author.value,
-                                    imageUrl.value,
-                                    price.intValue,
-                                    publisher.value,
-                                    description.value
+                                    title = title.value,
+                                    author = author.value,
+                                    imageUrl = imageUrl.value,
+                                    price = price.intValue,
+                                    publisher = publisher.value,
+                                    description = description.value
                                 )
                             )
                         )
@@ -169,12 +169,12 @@ fun AddBookScreen(
                             viewModel.sendEvent(
                                 AddBookContract.Event.SaveBookTemporarily(
                                     Book(
-                                        title.value,
-                                        author.value,
-                                        imageUrl.value,
-                                        price.intValue,
-                                        publisher.value,
-                                        description.value
+                                        title = title.value,
+                                        author = author.value,
+                                        imageUrl = imageUrl.value,
+                                        price = price.intValue,
+                                        publisher = publisher.value,
+                                        description = description.value
                                     )
                                 )
                             )

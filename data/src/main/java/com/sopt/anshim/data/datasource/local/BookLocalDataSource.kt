@@ -15,4 +15,11 @@ internal class BookLocalDataSource @Inject constructor(
     fun getAllBooks(): Flow<List<BookEntity>> {
         return bookDao.getAllBooks()
     }
+    suspend fun deleteBook(book: BookEntity) {
+        bookDao.deleteBook(book)
+    }
+
+    suspend fun getBookById(id: Int): BookEntity? {
+        return bookDao.getBookById(id)
+    }
 }
