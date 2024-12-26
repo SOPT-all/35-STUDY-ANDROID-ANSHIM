@@ -27,7 +27,10 @@ class MainActivity : ComponentActivity() {
                 ) {
                     composable<Route.Home> {
                         HomeRoute(
-                            navToAddBook = { navigator.navigate(Route.AddBook) }
+                            navToAddBook = { navigator.navigate(Route.AddBook) },
+                            navToDetail = { book ->
+                                //TODO: 상세화면으로 이동
+                            }
                         )
                     }
 
