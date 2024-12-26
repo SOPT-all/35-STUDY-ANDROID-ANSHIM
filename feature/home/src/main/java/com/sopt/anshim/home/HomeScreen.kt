@@ -50,6 +50,10 @@ fun HomeRoute(
             }
     }
 
+    LaunchedEffect(true) {
+        viewModel.getBookList()
+    }
+
     HomeScreen(
         bookList = uiState.books,
         onFabClick ={

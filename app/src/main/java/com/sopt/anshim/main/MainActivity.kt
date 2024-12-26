@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
 
                     composable<Route.AddBook> {
                         AddBookScreen(
-                            naviToHome = { navigator.navigate(Route.Home) }
+                            naviToHome = { navigator.navigateUp() }
                         )
                     }
                 }

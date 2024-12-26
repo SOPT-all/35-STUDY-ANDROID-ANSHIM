@@ -31,6 +31,7 @@ internal fun HomeBookGroup(
             .aspectRatio(3.5f),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
+        
         UrlToBitmapImage(
             imageUri = book.image,
             hint = "IMAGE",

@@ -2,6 +2,7 @@ package com.sopt.anshim.designsystem.component.image
 
 import android.graphics.ImageDecoder
 import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -24,8 +25,9 @@ fun UrlToBitmapImage(
 ) {
     val context = LocalContext.current
     val bitmap = remember(imageUri) {
-        val uri = Uri.parse(imageUri)
-        if(imageUri.isNotBlank()){
+        //데이터베이스까지 수정돼야 할 것 같아서 일단 문자열 비교로 구현함
+        if(imageUri.isNotBlank() && imageUri != "null"){
+            val uri = Uri.parse(imageUri)
             ImageDecoder.decodeBitmap(
                 ImageDecoder.createSource(context.contentResolver, uri)
             )
