@@ -45,6 +45,7 @@ android {
 dependencies {
 
     implementation(projects.core.designsystem)
+    implementation(projects.data.repository)
     implementation(projects.feature.home)
     implementation(projects.feature.addbook)
     implementation(projects.feature.bookdetail)
@@ -69,7 +70,12 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     testImplementation(libs.junit)
+    testImplementation("org.robolectric:robolectric:4.14")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
+    testImplementation("io.mockk:mockk:1.13.5")
+    testImplementation("app.cash.turbine:turbine:1.1.0")
 
+    androidTestImplementation("io.mockk:mockk-android:1.13.5")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

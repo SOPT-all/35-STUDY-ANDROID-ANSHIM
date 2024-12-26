@@ -1,11 +1,18 @@
 package com.sopt.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.sopt.datasource.local.BookLocalDataSource
+import com.sopt.datasource.remote.BookPagingSource
+import com.sopt.datasource.remote.BookRemoteDataSource
 import com.sopt.model.book.Book
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class BookRepositoryImpl @Inject constructor(
     private val bookLocalDataSource: BookLocalDataSource,
+    private val bookRemoteDataSource: BookRemoteDataSource
 ) : BookRepository {
 
     override suspend fun saveBookTemporary(book: Book) {
@@ -35,5 +42,19 @@ class BookRepositoryImpl @Inject constructor(
 
     override suspend fun getBook(id: Long): Book {
         return bookLocalDataSource.getBook(id)
+    }
+
+    override fun searchBooks(query: String): Flow<PagingData<Book>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = false
+            ), pagingSourceFactory = {
+                BookPagingSource(
+                    bookRemoteDataSource = bookRemoteDataSource,
+                    query = query
+                )
+            }
+        ).flow
     }
 }

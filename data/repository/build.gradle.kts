@@ -42,6 +42,7 @@ dependencies {
     implementation(projects.data.datasource)
     implementation(projects.data.datastore)
 
+    implementation(libs.paging.runtime)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

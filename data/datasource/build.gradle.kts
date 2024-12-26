@@ -37,7 +37,9 @@ dependencies {
 
     api(projects.data.datastore)
     implementation(projects.data.room)
+    api(projects.data.remote)
 
+    implementation(libs.paging.runtime)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

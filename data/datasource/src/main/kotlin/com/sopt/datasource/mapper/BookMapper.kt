@@ -2,6 +2,7 @@ package com.sopt.datasource.mapper
 
 import com.sopt.anshim.room.BookEntity
 import com.sopt.model.book.Book
+import com.sopt.remote.BookDto
 
 fun Book.toEntity(): BookEntity {
     return BookEntity(
@@ -23,5 +24,17 @@ fun BookEntity.toDomain(): Book {
         publisher = this.publisher,
         description = this.description,
         image = this.imageUri
+    )
+}
+
+fun BookDto.toDomain(): Book {
+    return Book(
+        id = isbn.toLong(),
+        title = this.title,
+        author = this.author,
+        price = this.discount,
+        publisher = this.publisher,
+        description = this.description,
+        image = this.image
     )
 }
