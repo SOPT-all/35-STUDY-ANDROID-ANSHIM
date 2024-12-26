@@ -22,26 +22,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.sopt.anshim.core.util.price.toDecimalFormat
 import com.sopt.anshim.domain.model.Book
 
-private val dummyBook = Book(
-    title = "The Great Gatsby",
-    author = "F. Scott Fitzgerald",
-    imageUrl = "https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788936434595.jpg",
-    price = 10000,
-    publisher = "Scribner",
-    description = "A novel about the decadence and excess of the Jazz Age. A novel about the decadence and excess of the Jazz Age"
-)
-
-@Preview(showBackground = true)
 @Composable
-fun BookItem (
-    book: Book = dummyBook,
+fun BookItem(
+    book: Book,
     modifier: Modifier = Modifier,
     onBookDetailClick: () -> Unit = {}
 ) {
