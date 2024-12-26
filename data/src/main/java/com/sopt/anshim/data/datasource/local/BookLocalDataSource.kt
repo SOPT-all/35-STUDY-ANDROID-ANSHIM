@@ -8,7 +8,7 @@ internal class BookLocalDataSource @Inject constructor(
     private val bookDao: BookDao
 ) {
     suspend fun addBook(book: BookEntity) {
-        bookDao.insertAreaCode(book)
+        bookDao.insertBook(book)
     }
 
     suspend fun deleteBook(book: BookEntity) {
