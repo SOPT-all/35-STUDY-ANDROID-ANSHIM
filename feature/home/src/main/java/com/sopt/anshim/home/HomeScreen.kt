@@ -29,9 +29,9 @@ import com.sopt.model.book.Book
 @Composable
 fun HomeRoute(
     navToAddBook: () -> Unit,
+    navToDetail: (Book) -> Unit = {},
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
-    navToDetail: (Book) -> Unit = {},
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -48,6 +48,10 @@ fun HomeRoute(
                     }
                 }
             }
+    }
+
+    LaunchedEffect(true) {
+        viewModel.getBookList()
     }
 
     HomeScreen(
