@@ -2,7 +2,6 @@ package com.sopt.anshim.designsystem.component.image
 
 import android.graphics.ImageDecoder
 import android.net.Uri
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
