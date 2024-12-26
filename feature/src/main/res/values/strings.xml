@@ -9,7 +9,11 @@
     <string name="addBook_publisher">출판사를 입력해 주세요.</string>
     <string name="addBook_save">저장</string>
     <string name="addBook_saveTemporarily">임시저장</string>
+    <string name="bookDetail_delete">삭제하기</string>
     <string name="home_fab_add_book">Add Book</string>
     <string name="home_text_home_screen">Home Screen</string>
     <string name="addbook_text_addbook_screen">AddBook Screen</string>
+    <string name="bookDetail_author">저자: %1$s</string>
+    <string name="bookDetail_publisher">출판사: %1$s</string>
+    <string name="bookDetail_price">가격: %1$s</string>
 </resources>

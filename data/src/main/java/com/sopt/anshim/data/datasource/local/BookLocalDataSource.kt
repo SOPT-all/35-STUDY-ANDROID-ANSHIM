@@ -10,4 +10,12 @@ internal class BookLocalDataSource @Inject constructor(
     suspend fun addBook(book: BookEntity) {
         bookDao.insertAreaCode(book)
     }
+
+    suspend fun deleteBook(book: BookEntity) {
+        bookDao.deleteBook(book)
+    }
+
+    suspend fun getBookById(id: Int): BookEntity? {
+        return bookDao.getBookById(id)
+    }
 }
