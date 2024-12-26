@@ -48,7 +48,6 @@ fun AddBookScreen(
     viewModel: AddBookViewModel = hiltViewModel()
 ) {
     val effectFlow = viewModel.effect
-
     LaunchedEffect(Unit) {
         effectFlow.collectLatest { effect ->
             when (effect) {
@@ -57,7 +56,7 @@ fun AddBookScreen(
                 }
 
                 is AddBookContract.Effect.ShowSnackBar -> {
-                    // 스낵바 보여주기
+                    // ShowSnackBar
                 }
             }
         }
@@ -187,7 +186,7 @@ fun AddBookScreen(
                     Text(stringResource(id = R.string.addBook_saveTemporarily))
                 }
             }
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(50.dp))
         }
     }
 }
