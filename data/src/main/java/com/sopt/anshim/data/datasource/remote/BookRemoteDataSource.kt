@@ -7,7 +7,7 @@ import javax.inject.Inject
 class BookRemoteDataSource @Inject constructor(
     private val bookService: BookService
 ) {
-    suspend fun searchBooks(query: String): BookResponse {
-        return bookService.searchBooks(query)
+    suspend fun searchBooks(query: String, start: Int): BookResponse {
+        return bookService.searchBooks(query, start)
     }
 }

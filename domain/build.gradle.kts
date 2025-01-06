@@ -16,4 +16,6 @@ kotlin {
 
 dependencies {
     implementation(libs.kotlinx.coroutines.core)
+    // alternatively - without Android dependencies for tests
+    implementation(libs.androidx.paging.common)
 }

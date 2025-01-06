@@ -2,6 +2,7 @@ package com.sopt.anshim.data.di
 
 import com.sopt.anshim.data.database.dao.BookDao
 import com.sopt.anshim.data.datasource.local.BookLocalDataSource
+import com.sopt.anshim.data.datasource.remote.BookPagingSourceFactory
 import com.sopt.anshim.data.datasource.remote.BookRemoteDataSource
 import com.sopt.anshim.data.service.BookService
 import dagger.Module
@@ -25,4 +26,10 @@ internal object DataSourceModule {
     fun provideBookRemoteDataSource(
         bookService: BookService
     ): BookRemoteDataSource = BookRemoteDataSource(bookService)
+
+    @Singleton
+    @Provides
+    fun provideBookPagingSourceFactory(
+        remoteDataSource: BookRemoteDataSource
+    ): BookPagingSourceFactory = BookPagingSourceFactory(remoteDataSource)
 }

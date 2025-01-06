@@ -8,5 +8,7 @@ interface BookService {
     @GET("book.json")
     suspend fun searchBooks(
         @Query("query") query: String,
+        @Query("start") start: Int = 1,
+        @Query("display") display: Int = 15
     ): BookResponse
 }

@@ -1,10 +1,12 @@
 package com.sopt.anshim.data.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.sopt.anshim.data.datasource.local.BookLocalDataSource
-import com.sopt.anshim.data.datasource.remote.BookRemoteDataSource
+import com.sopt.anshim.data.datasource.remote.BookPagingSourceFactory
 import com.sopt.anshim.data.mapper.toBook
 import com.sopt.anshim.data.mapper.toBookEntity
-import com.sopt.anshim.data.mapper.toDomainModel
 import com.sopt.anshim.domain.model.Book
 import com.sopt.anshim.domain.repository.BookRepository
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +15,7 @@ import javax.inject.Inject
 
 internal class BookRepositoryImpl @Inject constructor(
     private val bookLocalDataSource: BookLocalDataSource,
-    private val bookRemoteDataSource: BookRemoteDataSource
+    private val pagingSourceFactory: BookPagingSourceFactory
 ): BookRepository {
     override suspend fun addBook(book: Book) {
         bookLocalDataSource.addBook(book.toBookEntity())
@@ -24,10 +26,14 @@ internal class BookRepositoryImpl @Inject constructor(
             entities.map { it.toBook() }
         }
     }
-    override suspend fun searchBooks(query: String): Result<List<Book>> = runCatching {
-        bookRemoteDataSource.searchBooks(query).toDomainModel()
+
+    override suspend fun searchBooks(query: String): Flow<PagingData<Book>> {
+        return Pager(
+            config = PagingConfig(pageSize = 15, enablePlaceholders = false),
+            pagingSourceFactory = { pagingSourceFactory.create(query) }
+        ).flow
     }
-    
+
     override suspend fun deleteBook(book: Book) {
         bookLocalDataSource.deleteBook(book.toBookEntity())
     }

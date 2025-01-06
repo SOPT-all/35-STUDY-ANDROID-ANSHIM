@@ -13,4 +13,7 @@ sealed class Screen {
     @Serializable
     data class BookDetail(val bookId: Int) : Screen()
 
+    @Serializable
+    data object BookSearch : Screen()
+
 }

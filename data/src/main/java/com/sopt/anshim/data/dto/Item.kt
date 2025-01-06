@@ -6,10 +6,10 @@ import kotlinx.serialization.Serializable
 data class Item(
     val author: String,
     val description: String,
-    val discount: Int?,
+    val discount: String?,
     val image: String,
     val isbn: String,
-    val link: Int,
+    val link: String,
     val pubdate: String,
     val publisher: String,
     val title: String
